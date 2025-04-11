@@ -91,7 +91,7 @@ void main() {
 
       // Selected currencies without entering a number
 
-      // First Input testing empty input
+      // First Input testing the empty input
       await tester.enterText(find.byType(TextField).first, '');
       
       await tester.tap(find.byType(DropdownButton<String>).first);
@@ -100,7 +100,7 @@ void main() {
       await tester.tap(find.text('South African Rand (R)').last);
       await tester.pumpAndSettle();
 
-      // Second Input testing empty input
+      // Second Input testing the empty input
       await tester.enterText(find.byType(TextField).last, '');
 
       await tester.tap(find.byType(DropdownButton<String>).last);
