@@ -47,7 +47,7 @@ void main() {
       await tester.tap(find.byType(DropdownButton<String>).last);
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('South African Rand (R)').last);
+      await tester.tap(find.text('US Dollar (\$)').last);
       await tester.pumpAndSettle();
 
       // Entering a value in the input field
@@ -78,9 +78,43 @@ void main() {
 
       expect(find.textContaining('Error'), findsOneWidget);
 
-      // Select dropdowns without entering a number
-
-      // run flutter test test/file_test.dart
     });
+    // Select dropdowns without entering a number
+    testWidgets('Shows error when one or both input are empty', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: HomeScreen(),
+        )
+      );
+
+      await tester.pumpAndSettle();
+
+      // Selected currencies without entering a number
+
+      // First Input testing empty input
+      await tester.enterText(find.byType(TextField).first, '');
+      
+      await tester.tap(find.byType(DropdownButton<String>).first);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('South African Rand (R)').last);
+      await tester.pumpAndSettle();
+
+      // Second Input testing empty input
+      await tester.enterText(find.byType(TextField).last, '');
+
+      await tester.tap(find.byType(DropdownButton<String>).last);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('US Dollar (\$)').last);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Update'));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining('Error'), findsOneWidget);
+    });
+
+    // run flutter test test/file_test.dart
   });
 }
